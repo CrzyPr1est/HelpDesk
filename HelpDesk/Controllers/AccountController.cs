@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using System.Web.Security;
 using HelpDesk.Models.DAL;
 using HelpDesk.Models;
@@ -12,7 +13,6 @@ namespace HelpDesk.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -31,6 +31,12 @@ namespace HelpDesk.Controllers
                     }
                     else
                     {
+                        // Отладочное
+                        if (returnUrl != null)
+                            System.Diagnostics.Debug.WriteLine(returnUrl);
+                        else
+                            System.Diagnostics.Debug.WriteLine("Строка то блять пустая");
+                        // Отладочное
                         return RedirectToAction("Index", "Request");
                     }
                 }
