@@ -38,3 +38,7 @@ C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\bin
 C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\obj\Debug\HelpDesk.csprojResolveAssemblyReference.cache
 C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\obj\Debug\HelpDesk.dll
 C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\obj\Debug\HelpDesk.pdb
+C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\bin\EntityFramework.dll
+C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\bin\EntityFramework.SqlServer.dll
+C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\bin\EntityFramework.xml
+C:\Users\CrazyPriest\documents\visual studio 2015\Projects\HelpDesk\HelpDesk\bin\EntityFramework.SqlServer.xml
