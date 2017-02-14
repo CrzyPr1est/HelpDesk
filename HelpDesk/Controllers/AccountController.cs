@@ -35,7 +35,7 @@ namespace HelpDesk.Controllers
                         if (returnUrl != null)
                             System.Diagnostics.Debug.WriteLine(returnUrl);
                         else
-                            System.Diagnostics.Debug.WriteLine("Строка то блять пустая");
+                            System.Diagnostics.Debug.WriteLine("Строка то блять пустая!");
                         // Отладочное
                         return RedirectToAction("Index", "Request");
                     }
