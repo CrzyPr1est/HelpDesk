@@ -14,11 +14,56 @@ namespace HelpDesk.Controllers
     {
         private HelpdeskContext _db = new HelpdeskContext();
 
+        // Метод для отображения списка пользователей
         [HttpGet]
         public ActionResult Index()
         {
             var users = _db.Users.Include(u => u.Department).Include(u => u.Role).ToList();
+
+            // Добавляем возможность выбора всех отделов
+            List<Department> departments = _db.Departments.ToList();
+            departments.Insert(0, new Department { Id = 0, Name = "Все" });
+            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+
+            // Добавляем возможность выбора всех ролей
+            List<Role> roles = _db.Roles.ToList();
+            roles.Insert(0, new Role { Id = 0, Name = "Все" });
+            ViewBag.Roles = new SelectList(roles, "Id", "Name");
+
             return View(users);
+        }
+
+        // Метод для сортировке по отделу и роли
+        [HttpPost]
+        public ActionResult Index(int department, int role)
+        {
+            IEnumerable<User> allUsers = null;
+            if (role == 0 && department == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else if (role !=0 && department == 0)
+            {
+                allUsers = from user in _db.Users.Include(u => u.Department).Include(u => u.Role) where user.RoleId == role select user;
+            }
+            else if (role == 0 && department != 0)
+            {
+                allUsers = from user in _db.Users.Include(u => u.Department).Include(u => u.Role) where user.DepartmentId == department select user;
+            }
+            else
+            {
+                allUsers = from user in _db.Users.Include(u => u.Department).Include(u => u.Role) where user.DepartmentId == department && user.RoleId == role select user;
+            }
+            List<Department> departments = _db.Departments.ToList();
+            //Добавляем в список возможность выбора всех
+            departments.Insert(0, new Department { Name = "Все", Id = 0 });
+            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+
+            List<Role> roles = _db.Roles.ToList();
+            roles.Insert(0, new Role { Name = "Все", Id = 0 });
+            ViewBag.Roles = new SelectList(roles, "Id", "Name");
+
+            return View(allUsers.ToList());
         }
 
         // Метод на отображение информации о ролях и подразделениях

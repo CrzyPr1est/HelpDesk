@@ -7,6 +7,21 @@
     Layout = null;
 }
 
+<div>
+    @using (Html.BeginForm("Index", "User"))
+    { 
+        <table>
+            <tr>
+                <td><p>Отдел: </p></td>
+                <td> @Html.DropDownList("department", ViewBag.Departments as SelectList)</td>
+                <td><p>Статус : </p></td>
+                <td> @Html.DropDownList("role", ViewBag.Roles as SelectList)</td>
+                <td><input type="submit" value="Фильтр" /> </td>
+            </tr>
+        </table>
+    }
+</div>
+
 <h2>Список пользователей</h2>
 
 <table>
