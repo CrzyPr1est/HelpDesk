@@ -1,0 +1,39 @@
+﻿@model HelpDesk.Models.Category
+@using HelpDesk.Models
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Категории";
+}
+
+<h2>Категории</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Новая категория</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}
+<table>
+    @foreach (Category item in ViewBag.Categories)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@Html.ActionLink("Удалить", "DeleteCategory", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
