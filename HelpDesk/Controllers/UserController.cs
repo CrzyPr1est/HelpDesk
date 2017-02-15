@@ -20,5 +20,35 @@ namespace HelpDesk.Controllers
             var users = _db.Users.Include(u => u.Department).Include(u => u.Role).ToList();
             return View(users);
         }
+
+        // Метод на отображение информации о ролях и подразделениях
+        [HttpGet]
+        [Authorize(Roles = "Администратор")]
+        public ActionResult Create()
+        {
+            SelectList departments = new SelectList(_db.Departments, "Id", "Name");
+            ViewBag.Departments = departments;
+            SelectList roles = new SelectList(_db.Roles, "Id", "Name");
+            ViewBag.Roles = roles;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Администратор")]
+        public ActionResult Create(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Users.Add(user);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            SelectList departments = new SelectList(_db.Departments, "Id", "Name");
+            ViewBag.Departments = departments;
+            SelectList roles = new SelectList(_db.Roles, "Id", "Name");
+            ViewBag.Roles = roles;
+
+            return View(user);
+        }
     }
 }
