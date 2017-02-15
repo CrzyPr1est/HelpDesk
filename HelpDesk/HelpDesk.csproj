@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +194,8 @@
     <Content Include="Views\Service\Departments.cshtml" />
     <Content Include="Views\Service\Activ.cshtml" />
     <Content Include="Views\Service\Categories.cshtml" />
+    <Content Include="Views\Request\Create.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

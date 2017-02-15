@@ -1,0 +1,116 @@
+﻿@model IEnumerable<HelpDesk.Models.Request>
+@using HelpDesk.Models
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Список заявок";
+    int i = 0; //счетчик
+}
+
+<h2>Список заявок</h2>
+<p>Всего заявок: @(Model.Count<Request>())</p>
+<table>
+
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td><b>@i</b></td>
+            <td>
+                @if (item.Status == (int)HelpDesk.Models.Request.RequestStatus.Open)
+                {
+                    <img src="../../Content/pictures/status1.png" title="Заявка открыта" class="tdImage" />
+                }
+                else if (item.Status == (int)HelpDesk.Models.Request.RequestStatus.Distributed)
+                {
+                    <img src="../../Content/pictures/status2.png" title="Заявка распределена" class="tdImage" />
+                }
+                else if (item.Status == (int)HelpDesk.Models.Request.RequestStatus.Proccesing)
+                {
+                    <img src="../../Content/pictures/status3.png" title="Заявка в процессе" class="tdImage" />
+                }
+                else if (item.Status == (int)HelpDesk.Models.Request.RequestStatus.Checking)
+                {
+                    <img src="../../Content/pictures/status4.png" title="Заявка на проверке" class="tdImage" />
+                }
+                else if (item.Status == (int)HelpDesk.Models.Request.RequestStatus.Closed)
+                {
+                    <img src="../../Content/pictures/status5.png" title="Заявка закрыта" class="tdImage" />
+                }
+            </td>
+            <td>
+                @if (item.Priority == (int)HelpDesk.Models.Request.RequestPriority.Low)
+                {
+                    <img src="../../Content/pictures/prior1.png" title="Низкий приоритет" class="tdImage" />
+                }
+                else if (item.Priority == (int)HelpDesk.Models.Request.RequestPriority.Medium)
+                {
+                    <img src="../../Content/pictures/prior2.png" title="Средний приоритет" class="tdImage" />
+                }
+                else if (item.Priority == (int)HelpDesk.Models.Request.RequestPriority.High)
+                {
+                    <img src="../../Content/pictures/prior3.png" title="Высокий приоритет" class="tdImage" />
+                }
+                else if (item.Priority == (int)HelpDesk.Models.Request.RequestPriority.Critical)
+                {
+                    <img src="../../Content/pictures/prior4.png" title="Критичный приоритет" class="tdImage" />
+                }
+            </td>
+            <td>
+                @if (item.File != null)
+                {
+                    <a href="/Request/Download/@item.Id"><img src="../../Content/pictures/filey.png" alt='@item.File' class="tdImage" /></a>
+                }
+                else
+                {
+                    <img src="../../Content/pictures/filen.png" alt="без файла изображения" class="tdImage" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lifecycle.Opened)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+
+                <div>
+                    <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Описание заявки"
+                       href="Request/Details/@item.Id">
+                        <img src="../../Content/pictures/info.png" class="tdImage" title="Описание заявки" />
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a class="openDialog" data-dialog-id="executorDialog" data-dialog-title="Исполнитель заявки"
+                       href="Request/Executor/@item.ExecutorId">
+                        <img src="../../Content/pictures/executor.png" class="tdImage" title="Исполнитель заявки" />
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a class="openDialog" data-dialog-id="lifecycleDialog" data-dialog-title="Жизненный цикл заявки"
+                       href="Request/Lifecycle/@item.LifecycleId">
+                        <img src="../../Content/pictures/lifecycle.png" class="tdImage" title="Жизненный цикл заявки" />
+                    </a>
+                </div>
+
+            </td>
+            <td>
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@Styles.Render("~/Content/themes/base/css")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+}
